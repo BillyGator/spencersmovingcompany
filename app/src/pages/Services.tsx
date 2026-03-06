@@ -1,9 +1,10 @@
 import { useEffect, useRef } from 'react';
+import { Helmet } from 'react-helmet-async';
+import { useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
 import AnimatedTitle from '@/components/AnimatedTitle';
 import {
   Truck,
@@ -14,6 +15,7 @@ import {
   Home,
   Building2,
   Car,
+  Armchair,
   ArrowRight,
   CheckCircle,
   Star
@@ -25,6 +27,20 @@ const Services = () => {
   const heroRef = useRef<HTMLDivElement>(null);
   const servicesRef = useRef<HTMLDivElement>(null);
   const processRef = useRef<HTMLDivElement>(null);
+  const location = useLocation();
+
+  // Scroll to specific service when navigating from Home page
+  useEffect(() => {
+    const scrollTo = (location.state as { scrollTo?: string } | null)?.scrollTo;
+    if (scrollTo) {
+      const el = document.getElementById(scrollTo);
+      if (el) {
+        setTimeout(() => {
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 400);
+      }
+    }
+  }, [location.state]);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -77,6 +93,7 @@ const Services = () => {
 
   const mainServices = [
     {
+      id: 'local-moves',
       icon: Home,
       title: 'Local Moves',
       description: 'Moving within the same city or nearby? Our local moving service is perfect for short-distance relocations. We handle everything from studio apartments to large family homes.',
@@ -87,9 +104,10 @@ const Services = () => {
         'Fully equipped trucks',
         'Furniture protection included',
       ],
-      image: '/images/local_move_infographic_v3.png',
+      image: '/images/local_move_infographic_v3.webp',
     },
     {
+      id: 'long-distance-moves',
       icon: Truck,
       title: 'Long Distance Moves',
       description: 'Relocating across Florida or out of state? We provide reliable long-distance moving services with careful planning and tracking to ensure your belongings arrive safely.',
@@ -100,9 +118,10 @@ const Services = () => {
         'Competitive flat-rate pricing',
         'Licensed for interstate moves',
       ],
-      image: '/images/long_distance_move_infographic_v3.png',
+      image: '/images/long_distance_move_infographic_v3.webp',
     },
     {
+      id: 'packing-services',
       icon: Package,
       title: 'Packing Services',
       description: 'Don\'t want to deal with the hassle of packing? Our professional packers use quality materials to protect your belongings, from fragile items to bulky furniture.',
@@ -113,9 +132,10 @@ const Services = () => {
         'Custom crating available',
         'Unpacking services',
       ],
-      image: '/images/packing_services_infographic_v5.png',
+      image: '/images/packing_services_infographic_v6.webp',
     },
     {
+      id: 'storage-solutions',
       icon: Warehouse,
       title: 'Storage Solutions',
       description: 'Need a place to store your belongings? We offer secure short-term and long-term storage options for residential and commercial customers.',
@@ -126,9 +146,10 @@ const Services = () => {
         'Secure facility',
         'Easy access to your items',
       ],
-      image: '/images/storage_solutions_infographic.png',
+      image: '/images/storage_solutions_infographic_v2.webp',
     },
     {
+      id: 'specialty-moves',
       icon: Piano,
       title: 'Specialty Moves',
       description: 'Have heavy, fragile, or valuable items? Our specialty moving service handles pianos, safes, antiques, artwork, and other items that require extra care.',
@@ -139,9 +160,10 @@ const Services = () => {
         'Artwork & sculptures',
         'Appliance moving',
       ],
-      image: '/images/Pic 8.jpg',
+      image: '/images/specialty_moves_infographic.webp',
     },
     {
+      id: 'labor-only',
       icon: Users,
       title: 'Labor Only',
       description: 'Renting your own truck? Our labor-only service provides professional movers to load and unload your belongings, saving you time and preventing injuries.',
@@ -152,7 +174,21 @@ const Services = () => {
         'Single-item moves',
         'Hourly rates available',
       ],
-      image: '/images/Pic 3.jpg',
+      image: '/images/labor_only_infographic.webp',
+    },
+    {
+      id: 'single-item-moves',
+      icon: Armchair,
+      title: 'Single Item Moves',
+      description: 'No job is too small! Need just one piece of furniture or a single appliance moved across town? Our team will handle it quickly and safely — no full truck required.',
+      features: [
+        'Furniture delivery & placement',
+        'Appliance moves',
+        'Store pickups & deliveries',
+        'Heavy or bulky single items',
+        'No minimum move size',
+      ],
+      image: '/images/single_item_moves_infographic.webp',
     },
   ];
 
@@ -199,6 +235,11 @@ const Services = () => {
 
   return (
     <div className="overflow-hidden">
+      <Helmet>
+        <title>Moving Services | Spencer's Moving Company</title>
+        <meta name="description" content="From local and long-distance moves to packing and storage, Spencer's Moving Company offers comprehensive moving solutions tailored to your needs." />
+        <link rel="canonical" href="https://spencersmovingcompany.com/services" />
+      </Helmet>
       {/* Hero Section */}
       <section
         ref={heroRef}
@@ -209,7 +250,7 @@ const Services = () => {
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#D32F2F] rounded-full blur-3xl" />
         </div>
 
-        <div className="relative w-full px-4 sm:px-6 lg:px-8 xl:px-12 py-20">
+        <div className="relative w-full px-4 sm:px-6 lg:px-16 xl:px-24 py-20">
           <div className="services-hero-content text-center max-w-4xl mx-auto">
 
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight">
@@ -226,12 +267,13 @@ const Services = () => {
 
       {/* Main Services Section */}
       <section ref={servicesRef} className="py-20 lg:py-28 bg-[#EAF2FB]">
-        <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-12">
+        <div className="w-full px-4 sm:px-6 lg:px-16 xl:px-24">
           <div className="space-y-20">
             {mainServices.map((service, index) => (
               <div
                 key={index}
-                className={`service-detail-card grid lg:grid-cols-2 gap-10 lg:gap-16 items-center ${index % 2 === 1 ? 'lg:flex-row-reverse' : ''
+                id={service.id}
+                className={`service-detail-card grid lg:grid-cols-2 gap-10 lg:gap-16 items-center scroll-mt-28 ${index % 2 === 1 ? 'lg:flex-row-reverse' : ''
                   }`}
               >
                 {/* Image */}
@@ -240,8 +282,9 @@ const Services = () => {
                     <img
                       src={service.image}
                       alt={service.title}
-                      className={`rounded-3xl shadow-2xl ${['Local Moves', 'Long Distance Moves', 'Packing Services', 'Storage Solutions'].includes(service.title) ? 'w-[60%] mx-auto' : 'w-full'
+                      className={`service-float rounded-3xl ${['Local Moves', 'Long Distance Moves', 'Packing Services', 'Storage Solutions', 'Specialty Moves', 'Labor Only', 'Single Item Moves'].includes(service.title) ? 'w-[60%] mx-auto' : 'w-full'
                         }`}
+                      style={{ animationDelay: `${index * 0.65}s` }}
                     />
 
                   </div>
@@ -285,47 +328,41 @@ const Services = () => {
 
       {/* Additional Services */}
       <section className="py-20 lg:py-28 bg-[#1B3B6F]">
-        <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-12">
+        <div className="w-full px-4 sm:px-6 lg:px-16 xl:px-24">
           <div className="text-center mb-16">
-            <span className="text-[#D32F2F] font-semibold uppercase tracking-wider text-sm">
-              Also Available
-            </span>
-            <AnimatedTitle className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-bold text-white block">
+            <AnimatedTitle className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white block">
               ADDITIONAL SERVICES
             </AnimatedTitle>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
+          <div className="grid md:grid-cols-3 gap-6 lg:gap-8 pb-8">
             {additionalServices.map((service, index) => (
-              <Card
+              <div
                 key={index}
-                className="bg-white/5 backdrop-blur-sm border-white/10 hover:bg-white/10 transition-all duration-300 rounded-2xl"
+                className="relative bg-white rounded-3xl p-6 lg:p-8 border-[4px] border-[#D32F2F] shadow-[6px_6px_0_#050D1A] transition-transform duration-300 hover:-translate-y-1 flex flex-col"
               >
-                <CardContent className="p-6 lg:p-8">
-                  <div className="w-14 h-14 bg-[#D32F2F] rounded-xl flex items-center justify-center mb-6">
-                    <service.icon className="w-7 h-7 text-white" />
-                  </div>
-                  <h3 className="text-xl font-bold text-white mb-3">
-                    {service.title}
-                  </h3>
-                  <p className="text-white/70 leading-relaxed">
-                    {service.description}
-                  </p>
-                </CardContent>
-              </Card>
+                <h3 className="text-xl font-black text-[#1B3B6F] mb-3 uppercase tracking-wide">
+                  {service.title}
+                </h3>
+                <p className="text-[#3A4A65] text-sm leading-relaxed mb-6">
+                  {service.description}
+                </p>
+                {/* Floating icon emblem */}
+                <div className="absolute -bottom-6 -right-4 w-12 h-12 rounded-full bg-[#D32F2F] border-[3px] border-[#050D1A] flex items-center justify-center shadow-[4px_4px_0_#050D1A]">
+                  <service.icon className="w-6 h-6 text-white" />
+                </div>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
+
       {/* Our Process */}
       <section ref={processRef} className="py-20 lg:py-28 bg-[#EAF2FB]">
-        <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-12">
+        <div className="w-full px-4 sm:px-6 lg:px-16 xl:px-24">
           <div className="text-center mb-16">
-            <span className="text-[#D32F2F] font-semibold uppercase tracking-wider text-sm">
-              How It Works
-            </span>
-            <AnimatedTitle className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-bold text-[#1B3B6F] block">
+            <AnimatedTitle className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#1B3B6F] block">
               OUR PROCESS
             </AnimatedTitle>
             <p className="mt-4 text-[#3A4A65] max-w-2xl mx-auto">
@@ -334,28 +371,29 @@ const Services = () => {
             </p>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10 pt-6">
             {processSteps.map((step, index) => (
               <div
                 key={index}
-                className="process-step bg-white rounded-2xl p-6 lg:p-8 shadow-lg relative"
+                className="process-step relative bg-white rounded-[2rem] border-[4px] border-[#1B3B6F] shadow-[10px_10px_0px_#1B3B6F] p-6 lg:p-8 transition-transform duration-300 hover:-translate-y-2"
               >
-                <span className="absolute -top-4 -left-2 text-6xl font-bold text-[#D32F2F]/20">
-                  {step.number}
-                </span>
-                <div className="relative">
-                  <h3 className="text-xl font-bold text-[#1B3B6F] mb-3">
-                    {step.title}
-                  </h3>
-                  <p className="text-[#3A4A65] text-sm leading-relaxed">
-                    {step.description}
-                  </p>
+                {/* Number badge top-left */}
+                <div className="absolute -top-5 -left-5 w-12 h-12 rounded-full bg-[#D32F2F] border-[3px] border-[#1B3B6F] flex items-center justify-center shadow-[4px_4px_0px_#1B3B6F] z-10">
+                  <span className="text-white font-black text-lg leading-none">{step.number}</span>
                 </div>
+
+                <h3 className="text-xl font-black text-[#1B3B6F] mb-3 uppercase tracking-wide mt-2">
+                  {step.title}
+                </h3>
+                <p className="text-[#3A4A65] text-sm leading-relaxed">
+                  {step.description}
+                </p>
               </div>
             ))}
           </div>
         </div>
       </section>
+
 
       {/* CTA Section */}
       <section className="py-20 lg:py-28 bg-[#1B3B6F] relative overflow-hidden">
@@ -364,7 +402,7 @@ const Services = () => {
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#D32F2F] rounded-full blur-3xl" />
         </div>
 
-        <div className="relative w-full px-4 sm:px-6 lg:px-8 xl:px-12">
+        <div className="relative w-full px-4 sm:px-6 lg:px-16 xl:px-24">
           <div className="max-w-4xl mx-auto text-center">
             <div className="flex items-center justify-center space-x-1 mb-6">
               {[...Array(5)].map((_, i) => (

@@ -13,11 +13,14 @@ import './App.css';
 gsap.registerPlugin(ScrollTrigger);
 
 const ScrollToTop = () => {
-  const { pathname } = useLocation();
+  const { pathname, state } = useLocation();
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
+    // Skip scroll-to-top when navigating to a specific section (deep-link)
+    if (!(state as { scrollTo?: string } | null)?.scrollTo) {
+      window.scrollTo(0, 0);
+    }
+  }, [pathname, state]);
 
   return null;
 };

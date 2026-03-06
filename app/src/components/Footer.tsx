@@ -29,7 +29,7 @@ const Footer = () => {
   return (
     <footer className="bg-[#0B1A33] text-white">
       {/* Main Footer */}
-      <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-12 py-12 lg:py-16">
+      <div className="w-full px-4 sm:px-6 lg:px-16 xl:px-24 py-12 lg:py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
           {/* Brand Column */}
           <div className="lg:col-span-1">
@@ -41,7 +41,7 @@ const Footer = () => {
               />
             </Link>
             <p className="text-white/70 text-sm leading-relaxed mb-6">
-              Big or small, we move it all. Spencer's Moving Company is your trusted 
+              Big or small, we move it all. Spencer's Moving Company is your trusted
               partner for local and long-distance moves across the Gulf Coast.
             </p>
             <div className="flex items-center space-x-1 mb-4">
@@ -166,7 +166,7 @@ const Footer = () => {
 
       {/* Bottom Bar */}
       <div className="bg-[#050D1A]">
-        <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-12 py-4">
+        <div className="w-full px-4 sm:px-6 lg:px-16 xl:px-24 py-4">
           <div className="flex flex-col md:flex-row items-center justify-between space-y-2 md:space-y-0">
             <p className="text-white/50 text-xs text-center md:text-left">
               © {currentYear} Spencer's Moving Company, LLC. All rights reserved.

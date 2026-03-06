@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -148,7 +149,8 @@ const Home = () => {
       title: 'LOCAL & LONG DISTANCE',
       description: 'From cross-town moves to interstate relocations, we handle it all with care.',
       link: '/services',
-      image: '/images/Pic 3.jpg',
+      scrollTo: 'local-moves',
+      image: '/images/Pic 3.webp',
       features: ['Local Moves', 'Interstate Relocations', 'Commercial Moving', 'Dedicated Fleet']
     },
     {
@@ -156,7 +158,8 @@ const Home = () => {
       title: 'PACKING SERVICES',
       description: 'Full or partial packing services with quality materials and expert care.',
       link: '/services',
-      image: '/images/Pic 5.jpg',
+      scrollTo: 'packing-services',
+      image: '/images/Pic 5.webp',
       features: ['Full Home Packing', 'Partial Packing', 'Unpacking Services', 'Quality Materials']
     },
     {
@@ -164,7 +167,8 @@ const Home = () => {
       title: 'STORAGE SOLUTIONS',
       description: 'Short-term and long-term storage options for your belongings.',
       link: '/services',
-      image: '/images/Pic 6.jpg',
+      scrollTo: 'storage-solutions',
+      image: '/images/Pic 6.webp',
       features: ['Short-Term Storage', 'Long-Term Storage', 'Climate Controlled', 'Secure Facility']
     },
     {
@@ -172,7 +176,8 @@ const Home = () => {
       title: 'SPECIALTY MOVES',
       description: 'Pianos, safes, antiques, and other heavy or fragile items.',
       link: '/services',
-      image: '/images/Pic 7.jpg',
+      scrollTo: 'specialty-moves',
+      image: '/images/Pic 7.webp',
       features: ['Piano Moving', 'Gun Safes', 'Antiques', 'Fine Art']
     },
     {
@@ -180,7 +185,8 @@ const Home = () => {
       title: 'LABOR ONLY',
       description: 'Loading and unloading help for your rental truck or container.',
       link: '/services',
-      image: '/images/Pic 8.jpg',
+      scrollTo: 'labor-only',
+      image: '/images/Pic 8.webp',
       features: ['Truck Loading', 'Truck Unloading', 'In-Home Moving', 'Container Loading']
     },
     {
@@ -188,10 +194,12 @@ const Home = () => {
       title: 'SINGLE ITEM MOVES',
       description: 'Need just a refrigerator or couch moved? No job is too small!',
       link: '/services',
-      image: '/images/top of truck.jpg',
+      scrollTo: 'single-item-moves',
+      image: '/images/top of truck.webp',
       features: ['Appliance Delivery', 'Furniture Moving', 'Store Pickups', 'Heavy Item Transport']
     },
   ];
+
 
   const whyUsItems = [
     'Licensed, Bonded & Insured',
@@ -225,10 +233,15 @@ const Home = () => {
 
   return (
     <div className="overflow-hidden">
+      <Helmet>
+        <title>Spencer's Moving Company | Top Rated Local & Long Distance Movers</title>
+        <meta name="description" content="Spencer's Moving Company is the #1 rated moving company on the Gulf Coast. We provide professional, reliable, and stress-free local and long-distance moving services. Big or small, we move it all!" />
+        <link rel="canonical" href="https://spencersmovingcompany.com/" />
+      </Helmet>
       <section
         ref={heroRef}
         className="relative min-h-[105vh] pt-28 pb-40 flex items-center overflow-hidden bg-fixed bg-cover bg-center"
-        style={{ backgroundImage: "url('/images/Blue_background.jpg')" }}
+        style={{ backgroundImage: "url('/images/Blue_background.webp')" }}
       >
         {/* Watermark Logo */}
         <div className="absolute inset-0 flex items-center justify-center opacity-10 pointer-events-none">
@@ -239,7 +252,7 @@ const Home = () => {
           />
         </div>
 
-        <div className="relative w-full px-4 sm:px-6 lg:px-8 xl:px-12 pt-20 flex justify-center">
+        <div className="relative w-full px-4 sm:px-6 lg:px-16 xl:px-24 pt-20 flex justify-center">
           <div className="max-w-4xl w-full relative">
             {/* Floating Satisfaction Ribbon */}
             <div className="hero-ribbon absolute hidden md:block -left-12 md:-left-20 lg:-left-32 top-10 xl:-left-36 xl:top-4 z-20">
@@ -327,7 +340,7 @@ const Home = () => {
 
       {/* Services Section */}
       <section ref={servicesRef} className="py-20 lg:py-28 bg-[#EAF2FB] relative z-20">
-        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-16 xl:px-24">
           <div className="text-center mb-20 lg:mb-28">
             <AnimatedTitle className="text-4xl sm:text-5xl lg:text-5xl font-black text-[#1B3B6F]">
               OUR SERVICES
@@ -375,7 +388,7 @@ const Home = () => {
                     ))}
                   </div>
 
-                  <Link to={service.link}>
+                  <Link to={service.link} state={{ scrollTo: service.scrollTo }}>
                     <Button
                       className={`font-black uppercase tracking-wider text-sm sm:text-base px-6 py-6 sm:px-8 sm:py-7 rounded-2xl transition-all duration-300 hover:-translate-y-1 ${index % 2 === 0
                         ? 'bg-[#D32F2F] hover:bg-[#B71C1C] text-white border-[3px] border-[#1B3B6F] shadow-[6px_6px_0px_#1B3B6F]'
@@ -397,12 +410,12 @@ const Home = () => {
         {/* Background Elements */}
         <div className="absolute top-0 right-0 w-1/2 h-full bg-[#0B1A33] skew-x-12 transform origin-top-right" />
 
-        <div className="relative w-full px-4 sm:px-6 lg:px-8 xl:px-12">
+        <div className="relative w-full px-4 sm:px-6 lg:px-16 xl:px-24">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             {/* Left - Image */}
             <div className="relative">
               <img
-                src="/images/fishing_team.jpg.png"
+                src="/images/fishing_team.jpg.webp"
                 alt="Spencer's Moving Team Fishing For Your Business"
                 className="rounded-3xl shadow-2xl w-full"
               />
@@ -455,7 +468,7 @@ const Home = () => {
 
       {/* Testimonials Section */}
       <section ref={testimonialsRef} className="py-20 lg:py-28 bg-[#EAF2FB]">
-        <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-12">
+        <div className="w-full px-4 sm:px-6 lg:px-16 xl:px-24">
           <div className="text-center mb-16">
             <span className="block text-[#D32F2F] font-semibold uppercase tracking-wider text-sm mb-3">
               Testimonials
@@ -507,7 +520,7 @@ const Home = () => {
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#D32F2F] rounded-full blur-3xl" />
         </div>
 
-        <div className="relative w-full px-4 sm:px-6 lg:px-8 xl:px-12">
+        <div className="relative w-full px-4 sm:px-6 lg:px-16 xl:px-24">
           <div className="cta-content max-w-4xl mx-auto text-center">
             <AnimatedTitle className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-white">
               LET'S GET MOVING

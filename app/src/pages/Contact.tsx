@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
-import { Card, CardContent } from '@/components/ui/card';
+
 import AnimatedTitle from '@/components/AnimatedTitle';
 import {
   Phone,
@@ -13,7 +14,6 @@ import {
   MapPin,
   Clock,
   Send,
-  CheckCircle,
   Facebook,
   Instagram,
   Star
@@ -160,19 +160,14 @@ const Contact = () => {
     },
   ];
 
-  const serviceAreas = [
-    { name: 'Pensacola, FL', status: 'active' },
-    { name: 'Gulf Breeze, FL', status: 'active' },
-    { name: 'Navarre, FL', status: 'active' },
-    { name: 'Fort Walton Beach, FL', status: 'active' },
-    { name: 'Destin, FL', status: 'active' },
-    { name: 'Niceville, FL', status: 'active' },
-    { name: 'Milton, FL', status: 'active' },
-    { name: 'Pace, FL', status: 'active' },
-  ];
 
   return (
     <div className="overflow-hidden">
+      <Helmet>
+        <title>Contact Us | Spencer's Moving Company</title>
+        <meta name="description" content="Get a free moving quote from Spencer's Moving Company. Contact us today to plan your stress-free move across the Gulf Coast." />
+        <link rel="canonical" href="https://spencersmovingcompany.com/contact" />
+      </Helmet>
       {/* Hero Section */}
       <section
         ref={heroRef}
@@ -183,11 +178,9 @@ const Contact = () => {
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#D32F2F] rounded-full blur-3xl" />
         </div>
 
-        <div className="relative w-full px-4 sm:px-6 lg:px-8 xl:px-12 py-16">
+        <div className="relative w-full px-4 sm:px-6 lg:px-16 xl:px-24 py-16">
           <div className="contact-hero-content text-center max-w-4xl mx-auto">
-            <span className="inline-block px-4 py-2 bg-[#D32F2F]/20 text-[#D32F2F] text-sm font-semibold uppercase tracking-wider rounded-full mb-6">
-              Get In Touch
-            </span>
+
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight">
               LET'S GET
               <span className="text-[#D32F2F]"> MOVING</span>
@@ -202,12 +195,12 @@ const Contact = () => {
 
       {/* Contact Form & Info Section */}
       <section className="py-20 lg:py-28 bg-[#EAF2FB]">
-        <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-12">
+        <div className="w-full px-4 sm:px-6 lg:px-16 xl:px-24">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
             {/* Form */}
             <div ref={formRef} className="contact-form">
-              <Card className="bg-white border-0 shadow-xl rounded-3xl overflow-hidden">
-                <CardContent className="p-6 lg:p-10">
+              <div className="bg-white rounded-[2rem] border-[4px] border-[#1B3B6F] shadow-[10px_10px_0px_#1B3B6F] overflow-hidden">
+                <div className="p-6 lg:p-10">
                   <div className="mb-8">
                     <AnimatedTitle className="text-2xl sm:text-3xl font-bold text-[#1B3B6F] mb-2 block">
                       Request a Free Quote
@@ -345,81 +338,79 @@ const Contact = () => {
                       )}
                     </Button>
                   </form>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
+
+              {/* Social media icons — below the form */}
+              <div className="flex items-center justify-center space-x-10 mt-10">
+                <a
+                  href="https://facebook.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-36 h-36 rounded-3xl bg-[#1877F2] flex items-center justify-center service-float border-[3px] border-[#1B3B6F] shadow-[6px_6px_0px_#1B3B6F] transition-transform duration-300 hover:scale-110"
+                  style={{ animationDelay: '0s' }}
+                >
+                  <Facebook className="w-16 h-16 text-white" />
+                </a>
+                <a
+                  href="https://instagram.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-36 h-36 rounded-3xl flex items-center justify-center service-float border-[3px] border-white shadow-[6px_6px_0px_#1B3B6F] transition-transform duration-300 hover:scale-110"
+                  style={{
+                    background: 'radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%)',
+                    animationDelay: '0.5s',
+                  }}
+                >
+                  <Instagram className="w-16 h-16 text-white" />
+                </a>
+              </div>
             </div>
 
             {/* Contact Info */}
-            <div ref={infoRef} className="space-y-6">
+            <div ref={infoRef} className="space-y-8 pt-6">
               {contactInfo.map((info, index) => (
-                <Card
+                <div
                   key={index}
-                  className="info-card bg-white border-0 shadow-lg rounded-2xl hover:shadow-xl transition-shadow duration-300"
+                  className="info-card relative bg-white rounded-[2rem] border-[4px] border-[#1B3B6F] shadow-[6px_6px_0px_#1B3B6F] p-5 transition-transform duration-300 hover:-translate-y-1"
                 >
-                  <CardContent className="p-6">
-                    <div className="flex items-start space-x-4">
-                      <div className="w-12 h-12 bg-[#1B3B6F] rounded-xl flex items-center justify-center flex-shrink-0">
-                        <info.icon className="w-6 h-6 text-white" />
-                      </div>
-                      <div>
-                        <h3 className="font-bold text-[#1B3B6F] mb-1">{info.title}</h3>
-                        {info.link ? (
-                          <a
-                            href={info.link}
-                            target={info.link.startsWith('http') ? '_blank' : undefined}
-                            rel={info.link.startsWith('http') ? 'noopener noreferrer' : undefined}
-                            className="text-[#3A4A65] hover:text-[#D32F2F] transition-colors"
-                          >
-                            {info.content}
-                          </a>
-                        ) : (
-                          <p className="text-[#3A4A65]">{info.content}</p>
-                        )}
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
+                  {/* Floating icon badge */}
+                  <div className="absolute -top-5 -left-5 w-12 h-12 rounded-full bg-[#D32F2F] border-[3px] border-[#1B3B6F] flex items-center justify-center shadow-[4px_4px_0px_#1B3B6F] z-10">
+                    <info.icon className="w-6 h-6 text-white" />
+                  </div>
+                  <div className="pl-8">
+                    <h3 className="font-black text-[#1B3B6F] mb-1 uppercase tracking-wide text-sm">{info.title}</h3>
+                    {info.link ? (
+                      <a
+                        href={info.link}
+                        target={info.link.startsWith('http') ? '_blank' : undefined}
+                        rel={info.link.startsWith('http') ? 'noopener noreferrer' : undefined}
+                        className="text-[#3A4A65] hover:text-[#D32F2F] transition-colors text-sm"
+                      >
+                        {info.content}
+                      </a>
+                    ) : (
+                      <p className="text-[#3A4A65] text-sm">{info.content}</p>
+                    )}
+                  </div>
+                </div>
               ))}
 
-              {/* Social Links */}
-              <Card className="info-card bg-[#1B3B6F] border-0 shadow-lg rounded-2xl">
-                <CardContent className="p-6">
-                  <h3 className="font-bold text-white mb-4">Follow Us</h3>
-                  <div className="flex space-x-4">
-                    <a
-                      href="https://facebook.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center hover:bg-[#D32F2F] transition-colors"
-                    >
-                      <Facebook className="w-6 h-6 text-white" />
-                    </a>
-                    <a
-                      href="https://instagram.com"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="w-12 h-12 bg-white/10 rounded-xl flex items-center justify-center hover:bg-[#D32F2F] transition-colors"
-                    >
-                      <Instagram className="w-6 h-6 text-white" />
-                    </a>
-                  </div>
-                </CardContent>
-              </Card>
-
-              {/* Satisfaction Guarantee */}
-              <div className="info-card bg-gradient-to-br from-[#D32F2F] to-[#B71C1C] rounded-2xl p-6 text-white">
-                <div className="flex items-center space-x-4">
-                  <img
-                    src="/images/Spencers_Satisfaction_ribbon.svg"
-                    alt="100% Satisfaction"
-                    className="h-20 w-auto"
-                  />
-                  <div>
-                    <h3 className="font-bold text-lg">100% Satisfaction Guaranteed</h3>
-                    <p className="text-white/80 text-sm mt-1">
-                      We're not happy until you're happy. That's our promise.
-                    </p>
-                  </div>
+              {/* Satisfaction Guarantee — floating ribbon + text */}
+              <div className="info-card flex items-center space-x-6 pt-4">
+                <img
+                  src="/images/Spencers_Satisfaction_ribbon.svg"
+                  alt="100% Satisfaction Guaranteed"
+                  className="h-80 w-auto service-float flex-shrink-0"
+                  style={{ animationDelay: '0.3s' }}
+                />
+                <div>
+                  <h3 className="font-black text-[#1B3B6F] text-xl uppercase tracking-wide mb-2">
+                    100% Satisfaction Guaranteed
+                  </h3>
+                  <p className="text-[#3A4A65] leading-relaxed">
+                    We're not happy until you're happy. That's our promise.
+                  </p>
                 </div>
               </div>
             </div>
@@ -429,12 +420,9 @@ const Contact = () => {
 
       {/* Service Areas */}
       <section ref={locationsRef} className="py-20 lg:py-28 bg-[#1B3B6F]">
-        <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-12">
+        <div className="w-full px-4 sm:px-6 lg:px-16 xl:px-24">
           <div className="text-center mb-16">
-            <span className="text-[#D32F2F] font-semibold uppercase tracking-wider text-sm">
-              Where We Operate
-            </span>
-            <AnimatedTitle className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-bold text-white block">
+            <AnimatedTitle className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white block">
               SERVICE AREAS
             </AnimatedTitle>
             <p className="mt-4 text-white/70 max-w-2xl mx-auto">
@@ -442,19 +430,15 @@ const Contact = () => {
             </p>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
-            {serviceAreas.map((area, index) => (
-              <div
-                key={index}
-                className="location-card bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-4 flex items-center space-x-3 hover:bg-white/10 transition-colors"
-              >
-                <CheckCircle className="w-5 h-5 text-[#D32F2F] flex-shrink-0" />
-                <span className="text-white font-medium">{area.name}</span>
-              </div>
-            ))}
+          <div className="flex justify-center">
+            <img
+              src="/images/Service_Locations.webp"
+              alt="Spencer's Moving Company Service Areas — Florida Panhandle"
+              className="w-full max-w-4xl h-auto rounded-3xl shadow-[10px_10px_0px_#050D1A]"
+            />
           </div>
 
-          <div className="mt-12 text-center">
+          <div className="mt-10 text-center">
             <p className="text-white/60 text-sm">
               Don't see your area? Contact us—we may still be able to help!
             </p>
@@ -464,7 +448,7 @@ const Contact = () => {
 
       {/* CTA Section */}
       <section className="py-20 lg:py-28 bg-[#EAF2FB]">
-        <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-12">
+        <div className="w-full px-4 sm:px-6 lg:px-16 xl:px-24">
           <div className="max-w-4xl mx-auto text-center">
             <div className="flex items-center justify-center space-x-1 mb-6">
               {[...Array(5)].map((_, i) => (

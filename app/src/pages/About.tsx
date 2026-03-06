@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Card, CardContent } from '@/components/ui/card';
@@ -108,22 +109,22 @@ const About = () => {
 
   const values = [
     {
-      image: '/images/value_customer_first_medal.png',
+      image: '/images/value_customer_first_medal.webp',
       title: 'Customer First',
       description: 'We treat every move like it\'s our own, ensuring your belongings arrive safely.',
     },
     {
-      image: '/images/value_trust_integrity.png',
+      image: '/images/value_trust_integrity.webp',
       title: 'Trust & Integrity',
       description: 'Licensed, bonded, and insured with transparent pricing and no hidden fees.',
     },
     {
-      image: '/images/value_excellence.png',
+      image: '/images/value_excellence.webp',
       title: 'Excellence',
       description: 'We strive for 100% satisfaction on every move, big or small.',
     },
     {
-      image: '/images/value_community.png',
+      image: '/images/value_community.webp',
       title: 'Community',
       description: 'Proudly serving the Gulf Coast community we call home.',
     },
@@ -138,6 +139,11 @@ const About = () => {
 
   return (
     <div className="overflow-hidden">
+      <Helmet>
+        <title>About Us | Spencer's Moving Company</title>
+        <meta name="description" content="Learn about Spencer's Moving Company, founded by Spencer Bethel. We are a top-rated, licensed, and insured moving company on the Gulf Coast dedicated to customer satisfaction." />
+        <link rel="canonical" href="https://spencersmovingcompany.com/about" />
+      </Helmet>
       {/* Hero Section */}
       <section
         ref={heroRef}
@@ -148,7 +154,7 @@ const About = () => {
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#D32F2F] rounded-full blur-3xl" />
         </div>
 
-        <div className="relative w-full px-4 sm:px-6 lg:px-8 xl:px-12 py-20">
+        <div className="relative w-full px-4 sm:px-6 lg:px-16 xl:px-24 py-20">
           <div className="about-hero-content text-center max-w-4xl mx-auto relative">
 
             {/* Animated Circle Callout graphic */}
@@ -171,7 +177,7 @@ const About = () => {
 
       {/* Our Story Section */}
       <section ref={storyRef} className="py-20 lg:py-28 bg-[#EAF2FB]">
-        <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-12">
+        <div className="w-full px-4 sm:px-6 lg:px-16 xl:px-24">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             {/* Left - Content */}
             <div className="story-content">
@@ -215,7 +221,7 @@ const About = () => {
             {/* Right - Image */}
             <div className="story-image relative">
               <img
-                src="/images/3 trucks.jpg"
+                src="/images/3 trucks.webp"
                 alt="Spencer's Moving Fleet"
                 className="rounded-3xl shadow-2xl w-full"
               />
@@ -230,7 +236,7 @@ const About = () => {
 
       {/* Our Values Section */}
       <section ref={valuesRef} className="py-20 lg:py-28 bg-[#1B3B6F]">
-        <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-12">
+        <div className="w-full px-4 sm:px-6 lg:px-16 xl:px-24">
           <div className="text-center mb-16">
             <AnimatedTitle className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white block">
               OUR VALUES
@@ -266,7 +272,7 @@ const About = () => {
 
       {/* Stats Section */}
       <section ref={statsRef} className="py-20 lg:py-28 bg-[#EAF2FB]">
-        <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-12">
+        <div className="w-full px-4 sm:px-6 lg:px-16 xl:px-24">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
             {stats.map((stat, index) => (
               <div
@@ -285,7 +291,7 @@ const About = () => {
 
       {/* Service Areas Section */}
       <section className="py-20 lg:py-28 bg-[#1B3B6F]">
-        <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-12">
+        <div className="w-full px-4 sm:px-6 lg:px-16 xl:px-24">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             {/* Left - Image */}
             <div className="relative order-2 lg:order-1 h-[350px] sm:h-[400px] lg:h-[500px]">
@@ -356,7 +362,7 @@ const About = () => {
 
       {/* Why We're Different */}
       <section className="py-20 lg:py-28 bg-[#EAF2FB]">
-        <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-12">
+        <div className="w-full px-4 sm:px-6 lg:px-16 xl:px-24">
           <div className="text-center mb-16">
             <AnimatedTitle className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#1B3B6F] block">
               WHY WE'RE DIFFERENT
@@ -415,7 +421,7 @@ const About = () => {
 
       {/* Team Section */}
       <section className="py-20 lg:py-28 bg-[#1B3B6F]">
-        <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-12">
+        <div className="w-full px-4 sm:px-6 lg:px-16 xl:px-24">
           <div className="text-center mb-16">
             <AnimatedTitle className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white block">
               MEET THE CREW
@@ -428,7 +434,7 @@ const About = () => {
 
           <div className="flex flex-col items-center">
             <img
-              src="/images/fishing_team.jpg.png"
+              src="/images/fishing_team.jpg.webp"
               alt="Spencer's Moving Team"
               className="rounded-3xl shadow-2xl w-full max-w-4xl border-4 border-white"
             />
